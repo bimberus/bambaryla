@@ -1,0 +1,450 @@
+/* Global Styles */
+:root {
+    --primary-color: #1a1a1a;
+    --secondary-color: #d4af37; /* Gold color for film industry theme */
+    --text-color: #f5f5f5;
+    --accent-color: #c0392b;
+    --bg-color: #121212;
+    --section-bg: rgba(0, 0, 0, 0.7);
+    --card-bg: rgba(30, 30, 30, 0.8);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    line-height: 1.6;
+    position: relative;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../pliki_grafik/tlo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.2;
+    z-index: -1;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.6) 100%);
+    z-index: -1;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    position: relative;
+    display: inline-block;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--accent-color);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Header Styles */
+header {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+}
+
+.logo h1 {
+    margin-bottom: 5px;
+    font-size: 1.8rem;
+}
+
+.tagline {
+    color: var(--secondary-color);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 30px;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    font-weight: 500;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Main Content Styles */
+main {
+    padding-top: 120px;
+}
+
+.section {
+    padding: 60px 0;
+    background-color: var(--section-bg);
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* Bio Section */
+.bio-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.bio-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.bio-image img {
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.bio-image img:hover {
+    transform: scale(1.02);
+}
+
+.bio-content {
+    flex: 2;
+    min-width: 300px;
+}
+
+.quote {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+    border-left: 3px solid var(--secondary-color);
+    padding-left: 15px;
+    margin: 20px 0;
+}
+
+.achievements ul {
+    list-style-type: none;
+}
+
+.achievements li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+}
+
+.achievements li::before {
+    content: '🎬';
+    position: absolute;
+    left: 0;
+}
+
+/* Productions Section */
+.productions {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.production-item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.production-item:hover {
+    transform: translateY(-5px);
+}
+
+.production-image {
+    flex: 1;
+    min-width: 250px;
+}
+
+.production-details {
+    flex: 2;
+    min-width: 300px;
+}
+
+.production-role, .production-year {
+    color: var(--secondary-color);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+/* Roles Section */
+.roles-intro {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.roles {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.role-item {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.role-item:hover {
+    transform: translateY(-5px);
+}
+
+.role-production {
+    color: var(--secondary-color);
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+/* Contact Section */
+.contact-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.contact-info, .contact-form {
+    flex: 1;
+    min-width: 300px;
+}
+
+.contact-info p {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.contact-info i {
+    margin-right: 10px;
+    color: var(--secondary-color);
+}
+
+.social-media {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--card-bg);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    border-radius: 5px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form-group input:focus, .form-group textarea:focus {
+    outline: 2px solid var(--secondary-color);
+}
+
+.submit-btn {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+
+/* Footer Styles */
+footer {
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-note {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    nav {
+        width: 100%;
+        display: none;
+    }
+    
+    nav.active {
+        display: block;
+    }
+    
+    nav ul {
+        flex-direction: column;
+    }
+    
+    nav ul li {
+        margin: 10px 0;
+    }
+    
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+    
+    .bio-container, .contact-container {
+        flex-direction: column;
+    }
+    
+    .production-item {
+        flex-direction: column;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+}
