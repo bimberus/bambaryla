@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Administracyjny - Bogdan Bambaryla</title>
+    <title>Panel Administracyjny - Grzegorz Golędzinowski</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -15,7 +15,7 @@
     <header>
         <div class="logo">
             <h1>Panel Administracyjny</h1>
-            <p class="tagline">Bogdan "Magic Eye" Bambaryla</p>
+            <p class="tagline">Grzegorz "Grzeźwy" Golędzinowski</p>
         </div>
         <a href="../index.html" class="back-to-site">
             <i class="fas fa-arrow-left"></i> Powrót do strony
@@ -53,6 +53,7 @@
                     <button class="admin-tab active" data-tab="media">Zarządzanie mediami</button>
                     <button class="admin-tab" data-tab="content">Edycja treści</button>
                     <button class="admin-tab" data-tab="messages">Wiadomości</button>
+                    <button class="admin-tab" data-tab="settings">Ustawienia</button>
                 </div>
                 
                 <div class="admin-content">
@@ -65,6 +66,7 @@
                                 <label for="media-category">Wybierz kategorię:</label>
                                 <select id="media-category">
                                     <option value="zdjecia_moje">Zdjęcia osobiste</option>
+                                    <option value="filmy">Filmy</option>
                                     <option value="moje_produkcie">Produkcje</option>
                                     <option value="moje_role">Role aktorskie</option>
                                     <option value="pliki_grafik">Pliki graficzne</option>
@@ -74,6 +76,14 @@
                             <div class="media-upload">
                                 <h4>Dodaj nowe pliki</h4>
                                 <form id="upload-form">
+                                    <div class="form-group">
+                                        <label for="file-type">Typ pliku</label>
+                                        <select id="file-type" name="file-type">
+                                            <option value="image">Zdjęcie</option>
+                                            <option value="video">Film</option>
+                                        </select>
+                                    </div>
+                                    
                                     <div class="form-group">
                                         <label for="file-upload">Wybierz plik</label>
                                         <input type="file" id="file-upload" name="file-upload" multiple>
@@ -122,6 +132,35 @@
                         </div>
                     </div>
                     
+                    <!-- Settings Tab -->
+                    <div class="tab-content" id="settings-tab">
+                        <h3>Ustawienia</h3>
+                        
+                        <div class="settings-container">
+                            <div class="password-change">
+                                <h4>Zmiana hasła</h4>
+                                <form id="password-form">
+                                    <div class="form-group">
+                                        <label for="current-password">Aktualne hasło</label>
+                                        <input type="password" id="current-password" name="current-password" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="new-password">Nowe hasło</label>
+                                        <input type="password" id="new-password" name="new-password" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="confirm-password">Potwierdź nowe hasło</label>
+                                        <input type="password" id="confirm-password" name="confirm-password" required>
+                                    </div>
+                                    
+                                    <button type="submit" class="submit-btn">Zmień hasło</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <!-- Messages Tab -->
                     <div class="tab-content" id="messages-tab">
                         <h3>Wiadomości</h3>
@@ -151,7 +190,7 @@
                                 </div>
                                 <div class="message-subject">Wywiad do magazynu filmowego</div>
                                 <div class="message-content">
-                                    <p>Szanowny Panie Bambaryla,</p>
+                                    <p>Szanowny Panie Golędzinowski,</p>
                                     <p>Reprezentuję magazyn "Kino Polskie". Chcielibyśmy przeprowadzić z Panem wywiad na temat Pańskiej kariery i innowacyjnych technik filmowania. Czy byłby Pan zainteresowany?</p>
                                     <p>Pozdrawiam,<br>Anna Nowak<br>Redaktor Naczelna</p>
                                 </div>
@@ -169,7 +208,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 Bogdan "Magic Eye" Bambaryla. Panel Administracyjny.</p>
+            <p>&copy; 2025 Grzegorz "Grzeźwy" Golędzinowski. Panel Administracyjny.</p>
         </div>
     </footer>
 

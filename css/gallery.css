@@ -64,6 +64,26 @@
     transform: scale(1.1);
 }
 
+/* Video Items */
+.video-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.video-item video {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.video-caption {
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
 /* Lightbox Styles */
 .lightbox {
     display: none;

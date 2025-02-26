@@ -1,4 +1,4 @@
-# Portfolio Operatora Filmowego - Bogdan "Magic Eye" Bambaryla
+# Portfolio Operatora Filmowego - Grzegorz "Grzeźwy" Golędzinowski
 
 Strona portfolio dla operatora filmowego z bogatym doświadczeniem w filmie i telewizji oraz okazjonalną karierą aktorską. Strona prezentuje zdjęcia, filmy i grafiki, umożliwia kontakt przez formularz oraz posiada panel administracyjny z logowaniem do zarządzania treścią.
 
@@ -18,6 +18,7 @@ Strona portfolio dla operatora filmowego z bogatym doświadczeniem w filmie i te
 │   ├── admin.css               # Style panelu
 │   └── admin.js                # Skrypty panelu
 ├── zdjecia_moje/               # Zdjęcia osobiste
+├── filmy/                      # Pliki wideo
 ├── moje_produkcie/             # Filmy i produkcje
 ├── moje_role/                  # Galeria z rolami aktorskimi
 └── pliki_grafik/               # Pliki graficzne (tło, logotypy)
@@ -63,6 +64,7 @@ Strona portfolio dla operatora filmowego z bogatym doświadczeniem w filmie i te
 ## Struktura katalogów mediów
 
 - `zdjecia_moje/` - Zdjęcia osobiste operatora
+- `filmy/` - Pliki wideo do galerii filmów
 - `moje_produkcie/` - Zdjęcia i materiały z produkcji filmowych
 - `moje_role/` - Zdjęcia z ról aktorskich
 - `pliki_grafik/` - Pliki graficzne używane na stronie
@@ -79,7 +81,7 @@ Projekt można rozszerzyć o:
 
 ## Autor
 
-Bogdan "Magic Eye" Bambaryla - fikcyjny operator filmowy z przymrużeniem oka.
+Grzegorz "Grzeźwy" Golędzinowski - fikcyjny operator filmowy z przymrużeniem oka.
 
 ## Licencja
 

@@ -11,8 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
+            // Get stored password or use default
+            const storedPassword = localStorage.getItem('admin_password') || 'admin123';
+            
             // Simple authentication (in a real app, this would be server-side)
-            if (username === 'admin' && password === 'admin123') {
+            if (username === 'admin' && password === storedPassword) {
                 loginSection.style.display = 'none';
                 adminPanel.style.display = 'block';
                 
@@ -101,6 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             const category = document.getElementById('media-category').value;
+            const fileType = document.getElementById('file-type').value;
             const fileInput = document.getElementById('file-upload');
             const description = document.getElementById('file-description').value;
             
@@ -110,13 +114,52 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // In a real app, this would upload to a server
-            alert(`Plik(i) zostały przesłane do kategorii "${category}".`);
+            alert(`${fileType === 'video' ? 'Film' : 'Zdjęcie'} zostało przesłane do kategorii "${category}".`);
             
             // Reset form
             uploadForm.reset();
             
             // Refresh gallery
             loadMediaGallery(category);
+        });
+    }
+    
+    // Password change form
+    const passwordForm = document.getElementById('password-form');
+    
+    if (passwordForm) {
+        passwordForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            // Default password is admin123 if not changed yet
+            const storedPassword = localStorage.getItem('admin_password') || 'admin123';
+            
+            if (currentPassword !== storedPassword) {
+                alert('Aktualne hasło jest nieprawidłowe.');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                alert('Nowe hasło i potwierdzenie hasła nie są zgodne.');
+                return;
+            }
+            
+            if (newPassword.length < 6) {
+                alert('Nowe hasło musi mieć co najmniej 6 znaków.');
+                return;
+            }
+            
+            // Store new password in localStorage
+            localStorage.setItem('admin_password', newPassword);
+            
+            alert('Hasło zostało zmienione pomyślnie.');
+            
+            // Reset form
+            passwordForm.reset();
         });
     }
     
@@ -158,25 +201,40 @@ document.addEventListener('DOMContentLoaded', function() {
         // In a real app, this would fetch from a server
         // For demo, we'll show placeholder items based on category
         
-        // Get file paths based on selected category
-        let filePaths = [];
+        // Get media items based on selected category
+        let mediaItems = [];
         
         switch(category) {
             case 'zdjecia_moje':
-                filePaths = ['../zdjecia_moje/kamera1.jpg'];
+                mediaItems = [
+                    { type: 'image', path: '../zdjecia_moje/kamera1.jpg' }
+                ];
+                break;
+            case 'filmy':
+                mediaItems = [
+                    { type: 'video', path: '#', title: 'Przykładowy film 1' },
+                    { type: 'video', path: '#', title: 'Przykładowy film 2' }
+                ];
                 break;
             case 'moje_produkcie':
-                filePaths = ['../moje_produkcie/plan_filmowy3.jpg'];
+                mediaItems = [
+                    { type: 'image', path: '../moje_produkcie/plan_filmowy3.jpg' }
+                ];
                 break;
             case 'moje_role':
-                filePaths = ['../moje_role/plan_filmowy4.jpeg'];
+                mediaItems = [
+                    { type: 'image', path: '../moje_role/plan_filmowy4.jpeg' }
+                ];
                 break;
             case 'pliki_grafik':
-                filePaths = ['../pliki_grafik/kamera.png', '../pliki_grafik/tlo.jpg'];
+                mediaItems = [
+                    { type: 'image', path: '../pliki_grafik/kamera.png' },
+                    { type: 'image', path: '../pliki_grafik/tlo.jpg' }
+                ];
                 break;
         }
         
-        if (filePaths.length === 0) {
+        if (mediaItems.length === 0) {
             galleryContainer.innerHTML = `
                 <div class="gallery-placeholder">
                     <p>Brak plików w tej kategorii</p>
@@ -186,18 +244,32 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Create gallery items
-        filePaths.forEach(path => {
-            const fileName = path.split('/').pop();
-            
+        mediaItems.forEach(item => {
+            const fileName = item.path.split('/').pop();
             const galleryItem = document.createElement('div');
             galleryItem.className = 'admin-gallery-item';
-            galleryItem.innerHTML = `
-                <img src="${path}" alt="${fileName}">
-                <div class="item-actions">
-                    <button class="edit-btn" title="Edytuj"><i class="fas fa-edit"></i></button>
-                    <button class="delete-btn" title="Usuń"><i class="fas fa-trash"></i></button>
-                </div>
-            `;
+            
+            if (item.type === 'image') {
+                galleryItem.innerHTML = `
+                    <img src="${item.path}" alt="${fileName}">
+                    <div class="item-actions">
+                        <button class="edit-btn" title="Edytuj"><i class="fas fa-edit"></i></button>
+                        <button class="delete-btn" title="Usuń"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+            } else if (item.type === 'video') {
+                galleryItem.innerHTML = `
+                    <video controls>
+                        <source src="${item.path}" type="video/mp4">
+                        Twoja przeglądarka nie obsługuje odtwarzania wideo.
+                    </video>
+                    <div class="video-caption">${item.title}</div>
+                    <div class="item-actions">
+                        <button class="edit-btn" title="Edytuj"><i class="fas fa-edit"></i></button>
+                        <button class="delete-btn" title="Usuń"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+            }
             
             galleryContainer.appendChild(galleryItem);
             
@@ -206,14 +278,19 @@ document.addEventListener('DOMContentLoaded', function() {
             const deleteBtn = galleryItem.querySelector('.delete-btn');
             
             editBtn.addEventListener('click', function() {
-                const newDescription = prompt('Edytuj opis pliku:', fileName);
+                const itemName = item.type === 'video' ? item.title : fileName;
+                const newDescription = prompt('Edytuj opis pliku:', itemName);
                 if (newDescription) {
-                    alert(`Opis pliku "${fileName}" został zmieniony na "${newDescription}".`);
+                    alert(`Opis pliku "${itemName}" został zmieniony na "${newDescription}".`);
+                    if (item.type === 'video' && galleryItem.querySelector('.video-caption')) {
+                        galleryItem.querySelector('.video-caption').textContent = newDescription;
+                    }
                 }
             });
             
             deleteBtn.addEventListener('click', function() {
-                if (confirm(`Czy na pewno chcesz usunąć plik "${fileName}"?`)) {
+                const itemName = item.type === 'video' ? item.title : fileName;
+                if (confirm(`Czy na pewno chcesz usunąć plik "${itemName}"?`)) {
                     galleryItem.remove();
                     
                     if (galleryContainer.children.length === 0) {
@@ -249,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'bio':
                 defaultContent = `Legendarny operator filmowy, którego kariera rozpoczęła się przypadkowo, gdy jako dostawca pizzy wpadł na plan filmu "Matrix 4" (dosłownie wpadł, przewracając się na kable). Zamiast go wyrzucić, sestry Wachowski były tak rozbawione jego wejściem, że zaproponowały mu pracę jako operator kamery B.
 
-Od tego czasu jego charakterystyczny styl filmowania ("Metoda Bambaryli" - kręcenie wszystkiego pod kątem 15 stopni, bo jak twierdzi "życie nie jest proste") zrewolucjonizował polską kinematografię.`;
+Od tego czasu jego charakterystyczny styl filmowania ("Metoda Golędzinowskiego" - kręcenie wszystkiego pod kątem 15 stopni, bo jak twierdzi "życie nie jest proste") zrewolucjonizował polską kinematografię.`;
                 break;
             case 'achievements':
                 defaultContent = `- Nominacja do "Złotego Statywu" za najstabilniejsze ujęcia w trzęsącym się helikopterze
