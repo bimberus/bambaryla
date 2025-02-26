@@ -81,7 +81,7 @@ Projekt można rozszerzyć o:
 
 ## Autor
 
-Grzegorz "Grzeźwy" Golędzinowski - fikcyjny operator filmowy z przymrużeniem oka.
+bimberus
 
 ## Licencja
 
